@@ -1,0 +1,116 @@
+﻿@page
+@model LaRuta.Pages.Vehicles.IndexModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Escuela de Manejo</title>
+    <!-- Agrega tus estilos y scripts aquí -->
+    <!-- Comentario: Puedes agregar tus estilos y scripts aquí -->
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Lista de Vehiculos</h2>
+        <div class="table-responsive table-container overflow-visible">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="columns-container">
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().CN)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().LicensePlate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().Brand)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().Model)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().Year)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Vehicles.First().DriverID)
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Vehicles)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.CN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.LicensePlate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Brand)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Year)
+                            </td>
+                            <td>
+                                @if (item.DriverID.HasValue)
+                                {
+                                    @Html.DisplayFor(m => item.DriverID)
+                                }
+                                else
+                                {
+                                    <span>No asignado</span>
+                                }
+                            </td>
+                            <td class="d-flex">
+                                <div class="col-sm-6">
+                                    <a asp-page="UpdateVehicle" asp-route-CN="@item.CN" class="layout-btn btn btn-success">Editar</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <form method="post" id="deleteForm_@item.CN" class="delete-form">
+                                        <div class="col-sm-6">
+                                            <button type="submit" asp-page-handler="Delete" asp-route-CN="@item.CN" class="layout-btn btn btn-danger" onclick="return confirmDelete('@item.CN', '@item.DriverID')">BORRAR</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="crud-container">
+            <div class="col-sm-6">
+                <a asp-page="AddVehicle" class="layout-btn btn btn-primary">Crear nuevo Vehiculo</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmDelete(CN, DriverCI) {
+            if (DriverCI) {
+                // Mostrar la alerta o mensaje aquí
+                return confirm("No se puede eliminar un vehículo que tenga un Chofer asignado.");
+            } else {
+                // Confirmar la eliminación
+                return confirm('¿Estás seguro de que deseas eliminar este vehículo?');
+            }
+        }
+    </script>
+</body>
+
+</html>

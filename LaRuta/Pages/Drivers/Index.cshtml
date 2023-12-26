@@ -1,0 +1,131 @@
+﻿@page
+@model LaRuta.Pages.Drivers.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Escuela de Manejo</title>
+    <!-- Agrega tus estilos y scripts aquí -->
+    <!-- Comentario: Puedes agregar tus estilos y scripts aquí -->
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Lista de Choferes</h2>
+        <div class="table-responsive table-container overflow-visible">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="columns-container">
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().CI)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().LastName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().Age)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().Address)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().LicenseNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().LicenseExpiration)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.Drivers.First().VehicleId)
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Drivers)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => item.CI)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Age)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.Address)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.LicenseNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => item.LicenseExpiration)
+                            </td>
+                            <td>
+                                @if (item.VehicleId.HasValue)
+                                {
+                                    @Html.DisplayFor(m => item.VehicleId)
+                                }
+                                else
+                                {
+                                    <span>No asignado</span>
+                                }
+                            </td>
+                            <td class="d-flex">
+                                <div class="col-sm-6">
+                                    <a asp-page="UpdateDriver" asp-route-CI="@item.CI" class="layout-btn btn btn-success">Editar</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <form method="post" id="deleteForm_@item.CI" class="delete-form">
+                                        <div class="col-sm-6">
+                                            <button 
+                                                type="submit" asp-page-handler="Delete" asp-route-CI="@item.CI"
+                                                class="layout-btn btn btn-danger" 
+                                                onclick="return confirmDelete('@item.CI', '@item.VehicleId')"
+                                                >BORRAR
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="crud-container">
+            <div class="col-sm-6">
+                <a asp-page="AddDriver" class="layout-btn btn btn-primary">Crear nuevo Chofer</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmDelete(CI, vehicleId) {
+            if (vehicleId) {
+                // Mostrar la alerta o mensaje aquí
+                return confirm("No se puede eliminar a un chofer que tenga un vehiculo asignado.");
+            } else {
+                // Confirmar la eliminación
+                return confirm('¿Estás seguro de que deseas eliminar este chofer?');
+            }
+        }
+    </script>
+</body>
+
+</html>

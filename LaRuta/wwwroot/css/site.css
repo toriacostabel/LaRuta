@@ -1,0 +1,122 @@
+html {
+    font-size: 14px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    min-width: 980px;
+}
+
+body {
+    margin-bottom: 60px;
+    min-width: 980px;
+    background-color: #0D0D0D;
+    font-family: mukta, sans-serif;
+    color: #0D0D0D;
+    display: grid;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+}
+
+.layout-btn {
+    background-color: #424242;
+    border-color: #424242;
+}
+
+
+.header_image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    padding-bottom: 20px;
+}
+
+thead {
+    text-align: center;
+    box-shadow: 0 2px 4px;
+}
+
+.title-container {
+    font-size: 21.0pt 28px;
+    font-weight: normal;
+}
+
+.table-container {
+    max-width: auto;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    background-color: #f5f5f5;
+    border: 1px solid #bdc3c7;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    transition: border-color 0.3s ease;
+}
+
+    .table-container:hover {
+        border-color: #0026ff;
+    }
+
+
+
+.columns-container th, columns-container td {
+    background-color: #f5f5f5;
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #bdc3c7;
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+
+tr:hover {
+    transform: scale(1.02);
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.thead-container {
+    text-align: center;
+}
+
+th,
+td {
+    padding: 4px;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: #0026ff;
+}
+
+.driver-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    max-width: 100%;
+    margin: 0 auto;
+    border: 1px;
+    margin-top: 90px;
+    width: 20%;
+}
+
+h2, label {
+    color: white;
+}
+#create-driver-form{
+    font-size: 1.2em;
+}
+

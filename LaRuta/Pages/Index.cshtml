@@ -1,0 +1,111 @@
+﻿@page
+@model LaRuta.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="header_image">
+    <img src="/src/Banner.png" alt="Escuela de Manejo">
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="title-container">Lista de Conductores</h2>
+            <div class="table-responsive table-container overflow-visible">
+                <table class="table table-striped">
+                    <thead class="thead-container">
+                        <tr class="columns-container">
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().CI)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().FirstName)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().LastName)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().Age)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().Address)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().LicenseNumber)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().LicenseExpiration)</th>
+                            <th>@Html.DisplayNameFor(m => m.Drivers.First().VehicleId)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Drivers)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.CI)</td>
+                                <td>@Html.DisplayFor(m => item.FirstName)</td>
+                                <td>@Html.DisplayFor(m => item.LastName)</td>
+                                <td>@Html.DisplayFor(m => item.Age)</td>
+                                <td>@Html.DisplayFor(m => item.Address)</td>
+                                <td>@Html.DisplayFor(m => item.LicenseNumber)</td>
+                                <td>@Html.DisplayFor(m => item.LicenseExpiration)</td>
+                                <td>
+                                    @if (item.VehicleId.HasValue)
+                                    {
+                                        @Html.DisplayFor(m => item.VehicleId)
+                                    }
+                                    else
+                                    {
+                                        <span>No asignado</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between">
+                <h2 class="title-container">Lista de Vehiculos</h2>
+                <form method="post">
+                    <button type="submit" class="btn btn-light" name="OnPostShowAllVehicles" asp-page-handler="ShowAllVehicles">Mostrar Todos</button>
+                    <button type="submit" class="btn btn-dark" name="OnPostShowUnassignedVehicles" asp-page-handler="ShowUnassignedVehicles">Mostrar Vehículos No Asignados</button>
+                    <button type="submit" class="btn btn-secondary" name="OnPostShowOldestVehicle" asp-page-handler="ShowOldestVehicle">Mostrar Vehículo Más Antiguo</button>
+                </form>
+            </div>
+            
+            <div class="table-responsive table-container overflow-visible">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-container">
+                        <tr class="columns-container">
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().CN)</th>
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().LicensePlate)</th>
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().Brand)</th>
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().Model)</th>
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().Year)</th>
+                            <th>@Html.DisplayNameFor(m => m.Vehicles.First().DriverID)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Vehicles)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.CN)</td>
+                                <td>@Html.DisplayFor(m => item.LicensePlate)</td>
+                                <td>@Html.DisplayFor(m => item.Brand)</td>
+                                <td>@Html.DisplayFor(m => item.Model)</td>
+                                <td>@Html.DisplayFor(m => item.Year)</td>
+                                <td>
+                                    @if (item.DriverID.HasValue)
+                                    {
+                                        @Html.DisplayFor(m => item.DriverID)
+                                    }
+                                    else
+                                    {
+                                        <span>No asignado</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+

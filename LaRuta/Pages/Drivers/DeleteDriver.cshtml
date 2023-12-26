@@ -1,0 +1,27 @@
+﻿@page
+@model LaRuta.Pages.Drivers.DeleteDriverModel
+@{
+    var message = ViewData["Message"]?.ToString();
+}
+
+<h2>Eliminar Chofer:</h2>
+
+@{
+    if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="alert alert-success" role="alert">@message</div>
+    }
+}
+
+<form method="post" action="Eliminar" id="delete-driver-form" autocomplete="off">
+
+    <input type="hidden" asp-for="DeleteDriverRequest.CI" />
+
+    <p>¿Está seguro de que desea eliminar este chofer?</p>
+
+    <div class="adminButtons">
+        <button class="btn btn-danger m-2" type="submit" id="delete-button">Eliminar</button>
+        <!-- You can add a cancel button or a link to go back to the driver list page -->
+    </div>
+
+</form>

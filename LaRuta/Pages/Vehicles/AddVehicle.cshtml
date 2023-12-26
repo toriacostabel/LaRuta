@@ -1,0 +1,57 @@
+﻿@page
+@model LaRuta.Pages.Vehicles.AddVehicleModel
+@{
+    var message = ViewData["Message"]?.ToString();
+    var error = ViewData["Error"]?.ToString();
+}
+
+<h2> Crear nuevo Vehiculo: </h2> 
+
+@{
+    if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="alert alert-success" role="alert">@message</div>
+    }
+    if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger" role="alert">@error</div>
+    }
+}
+<form method="post">
+
+    <div class="mb-3">
+        <label class="form-label">Codigo Nacional:</label>
+        <input type="number" class="form-control" asp-for="AddVehicleRequest.CN" required min="00000" max="99999"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Matricula:</label>
+        <input type="text" class="form-control" asp-for="AddVehicleRequest.LicensePlate" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Marca:</label>
+        <input type="text" class="form-control" asp-for="AddVehicleRequest.Brand" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Modelo:</label>
+        <input type="text" class="form-control" asp-for="AddVehicleRequest.Model" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Año:</label>
+        <input type="text" class="form-control" asp-for="AddVehicleRequest.Year" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Chofer:</label>
+        <input type="number" class="form-control" asp-for="AddVehicleRequest.DriverID"  />
+    </div>
+
+    <div class="mb-3">
+       <button type="submit" class="btn btn-light my-2">Crear</button>
+    </div>
+
+
+</form>

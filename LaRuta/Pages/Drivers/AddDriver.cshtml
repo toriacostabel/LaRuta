@@ -1,0 +1,72 @@
+﻿@page
+@model LaRuta.Pages.Drivers.AddDriverModel
+@{
+    var message = ViewData["Message"]?.ToString();
+    var error = ViewData["Error"]?.ToString();
+}
+
+<h2> Crear nuevo Chofer: </h2>
+
+@{
+    if (!string.IsNullOrWhiteSpace(message))
+    {
+        <div class="alert alert-success" role="alert">@message</div>
+    }
+    if (!string.IsNullOrWhiteSpace(error))
+    {
+        <div class="alert alert-danger" role="alert">@error</div>
+    }
+}
+
+<form method="post" id="create-driver-form" autocomplete="off" >
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Cédula de Identidad:</label>
+        <input type="number" asp-for="AddDriverRequest.CI" class="input form-control" placeholder="Ingrese su cédula de Identidad" required min="00000000" max="99999999">
+        <span asp-validation-for="AddDriverRequest.CI" class="text-danger"></span>
+    </div>
+
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Nombre:</label>
+        <input asp-for="AddDriverRequest.FirstName" class="form-control" placeholder="Ingrese su nombre" required>
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Apellido:</label>
+        <input asp-for="AddDriverRequest.LastName" class="form-control" placeholder="Ingrese su apellido" required>
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Edad:</label>
+        <input asp-for="AddDriverRequest.Age" class="form-control" placeholder="Ingrese su edad" required min="18" max="99">
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Dirección:</label>
+        <input asp-for="AddDriverRequest.Address" class="form-control" placeholder="Ingrese su dirección" required>
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Licencia de Conducir:</label>
+        <input asp-for="AddDriverRequest.LicenseNumber" class="form-control" placeholder="Ingrese su número de licencia de conducir" required maxlength="8">
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Fecha de Expiración:</label>
+        <input asp-for="AddDriverRequest.LicenseExpiration" class="form-control" type="date" placeholder="Ingrese la fecha de expiración de la licencia" required>
+        <span asp-validation-for="AddDriverRequest.LicenseExpiration" class="text-danger"></span>
+    </div>
+
+    <div class="inputContainer mb-3">
+        <label class="form-label">Vehículo:</label>
+        <input asp-for="AddDriverRequest.VehicleId" class="form-control" placeholder="Ingrese un código de vehículo" min="00000" max="99999">
+    </div>
+
+
+    <div class="adminButtons mb-3">
+        <button class="btn btn-light m-2" type="submit" id="add-button">Aplicar</button>
+        <button class="btn btn-dark m-2" type="reset" id="reset-button">Reiniciar</button>
+    </div>
+
+</form>
